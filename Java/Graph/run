@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# Takes a .class file as an argument or provides 'Main' as the default.
+file=${1:-"Main"}
+# Takes a directory as an argument or provides the current directory as default for the classpath.
+cp=${2:-"$(dirname ${BASH_SOURCE[0]})/out/"}
+
+echo CLASSPATH=${cp} java ${file}
+echo
+CLASSPATH=${cp} java ${file}

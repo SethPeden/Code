@@ -1,0 +1,33 @@
+#!/bin/bash
+
+# Compiles a given directory recursively.
+function compileDirectory() {
+	if [[ -d ${1} ]]; then
+		# Compile Java code here.
+		for file in ${1}/*.java
+		do
+			# Checks to see if ${file} is a valid file.
+			if [[ -f ${file} ]]; then
+				# Compile the file.
+				echo javac ${file} -d ${out} -cp ${out}
+				javac ${file} -d ${out} -cp ${out}
+			fi
+		done
+		for sub in ${1}/*
+		do
+			compileDirectory ${sub}
+		done
+	fi
+}
+
+# Determining output path.
+out=${2:-${1:-$(dirname ${BASH_SOURCE[0]})}}/out
+
+# Clearing output path.
+if [[ -d ${out} ]]; then
+	rm -r ${out}
+fi
+mkdir ${out}
+
+# Call to compile
+compileDirectory ${1:-$(dirname ${BASH_SOURCE[0]})}

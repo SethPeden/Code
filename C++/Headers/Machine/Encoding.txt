@@ -1,0 +1,15 @@
+loadi:0
+add:1
+sub:2
+multiply:3
+divide:4
+modulus:5
+exp:6
+printi:7
+duplicate:8
+beq:9
+bne:10
+slt:11
+jump:12
+addi:13
+slti:14

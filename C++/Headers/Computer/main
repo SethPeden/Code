@@ -1,0 +1,23 @@
+20010002		-- addi	$1,		$0,		0x2			
+AC010050		-- sw		$1,		80($0)
+8C010050		-- lw		$1,		80($0)						# Load in input value
+23BDFFF0		-- addi	$29,	$29,	-16					# Allocate for function call
+AFBF000C		-- sw		$31,	12($29)						# Preserve RA
+AFBE0008		-- sw		$30,	8($29)						# Preserve FP
+AFA10004		-- sw		$1,		4($29)						# Store inputs
+0C00000E		-- jal		14											# Function call
+8FBF000C		-- lw		$31,	12($29)						# Restore RA
+8FBE0008		-- lw		$30,	8($29)						# Restore FP		
+8FA10000		-- lw		$1,		0($29)						# Read output
+AC010054		-- sw		$1,		84($0)						# Write out output value
+23BD0010		-- addi	$29,	$29,	16					# Deallocate for function call
+03E00008		-- jr		$31											# Return to caller
+23BE0000		-- addi	$30,	$29,	0						# Set up FP
+8FC10004		-- lw		$1,		4($30)						# Load in input value
+00210018		-- mult	$1,		$1								# $1 * $1
+00000812		-- mflo	$1											# $1 = $1 * $1
+AFC10000		-- sw		$1,		0($30)						# Save out output value
+03E00008		-- jr		$31											# Return to caller
+00000000		-- noop													# Memory Location
+00000000		-- noop													# Memory Location
+00000000		-- noop													# Memory Location
