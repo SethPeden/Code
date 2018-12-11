@@ -1,0 +1,6 @@
+n	/Users/Seth/Code/Websites/Phyllotaxis/index.js	/^var n = 0;$/;"	variable	line:1
+c	/Users/Seth/Code/Websites/Phyllotaxis/index.js	/^var c = 4;$/;"	variable	line:2
+setup	/Users/Seth/Code/Websites/Phyllotaxis/index.js	/^function setup() {$/;"	function	line:4
+setup	/Users/Seth/Code/Websites/Phyllotaxis/index.js	/^function setup() {$/;"	function	line:4
+draw	/Users/Seth/Code/Websites/Phyllotaxis/index.js	/^function draw() {$/;"	function	line:11
+draw	/Users/Seth/Code/Websites/Phyllotaxis/index.js	/^function draw() {$/;"	function	line:11
