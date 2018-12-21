@@ -1,0 +1,10 @@
+html	/Users/Seth/Code/Websites/Fourier/index.html	/^<html>$/;"	function	line:2
+head	/Users/Seth/Code/Websites/Fourier/index.html	/^  <head>$/;"	function	line:3
+title	/Users/Seth/Code/Websites/Fourier/index.html	/^    <title>Fourier<\/title>$/;"	function	line:4
+body	/Users/Seth/Code/Websites/Fourier/index.html	/^  <body>$/;"	function	line:6
+script	/Users/Seth/Code/Websites/Fourier/index.html	/^    <script type="text\/javascript" src=".\/p5\/p5.js"><\/script>$/;"	function	line:7
+script	/Users/Seth/Code/Websites/Fourier/index.html	/^    <script type="text\/javascript" src=".\/p5\/addons\/p5.dom.js"><\/script>$/;"	function	line:8
+script	/Users/Seth/Code/Websites/Fourier/index.html	/^    <script type="text\/javascript" src=".\/index.js"><\/script>$/;"	function	line:9
+style	/Users/Seth/Code/Websites/Fourier/index.html	/^  <style>$/;"	function	line:11
+setup	/Users/Seth/Code/Websites/Fourier/index.js	/^function setup() {$/;"	function	line:3
+draw	/Users/Seth/Code/Websites/Fourier/index.js	/^function draw() {$/;"	function	line:14
