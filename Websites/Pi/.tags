@@ -1,0 +1,3 @@
+setup	/Users/Seth/Code/Websites/Pi/index.js	/^function setup() {$/;"	function	line:9
+draw	/Users/Seth/Code/Websites/Pi/index.js	/^function draw() {$/;"	function	line:20
+function.draw	/Users/Seth/Code/Websites/Pi/index.js	/^function draw() {$/;"	function	line:20
