@@ -35,6 +35,11 @@ class LTSPredictor:
     #                       - If the length of @param observations is longer than
     #                         self.relfection, then multiple predictions will be made
     def getPredictions(self, observations):
+
+        # Added for better accuracy
+        # pad = observations[-1:] * np.ones((self.predictions - 1,))
+        # observations = np.append(observations, pad)
+
         L = len(observations)
         observations = np.reshape(observations, (L,))
 
