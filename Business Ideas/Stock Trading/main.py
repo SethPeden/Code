@@ -5,40 +5,38 @@ from pandas_datareader import data as pdData
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
 import sys
+import json
 
-def shouldBuy(observations):
-    L = len(observations)
-    observations = observations.reshape((L, ))
-    predictor = TSPredictor(25, 10).train(observations)
-    prediction = predictor.predict(observations)
-    future = prediction[-predictor.pred:]
-    return np.mean(np.diff(future)) > 0
+tickers = { 'AAPL', 'MSFT', 'GOOG', 'SNAP', 'FB', 'TSLA', 'F', 'GM', 'FCAU', 'DGAZ', 'UGAZ' }
 
 if __name__ == '__main__':
-    for i in np.arange(1, len(sys.argv)):
-        ticker = sys.argv[i]
 
-        trainDataFrame = pdData.DataReader(ticker, 'yahoo', str(datetime.today() - relativedelta(months=48)).split(' ')[0], str(datetime.today() - relativedelta(months=12)).split(' ')[0])['Close']
-        trainDates = trainDataFrame.keys()
-        trainClose = np.array(trainDataFrame)
+    # Training
+    training = []
+    for ticker in tickers:
+        stock = pdData.DataReader(ticker, 'yahoo', str(datetime.today() - relativedelta(months=4)).split(' ')[0], str(datetime.today() - relativedelta(months=1)).split(' ')[0])
+        close = stock['Close'] / stock['Close'][0]
+        training = np.append(training, np.array(close))
 
-        predictor = TSPredictor(25, 10).train(trainClose)
-        trainPredictionClose = predictor.predict(trainClose)
-        trainPredictionDates = (trainDates.to_pydatetime() + relativedelta(days=predictor.pred))[-len(trainPredictionClose): ]
+    predictor = TSPredictor().train(training)
+    n = np.arange(len(training))
+    prediction = predictor.predict(training)
+    m = np.arange(len(prediction)) + predictor.ref
 
-        testDataFrame = pdData.DataReader(ticker, 'yahoo', str(datetime.today() - relativedelta(months=12)).split(' ')[0], str(datetime.today()).split(' ')[0])['Close']
-        testDates = testDataFrame.keys()
-        testClose = np.array(testDataFrame)
+    plt.plot(n, training, label='Training')
+    plt.plot(m, prediction, label='Prediction')
+    plt.legend()
+    plt.show()
 
-        testPredictionClose = predictor.predict(testClose)
-        testPredictionDates = (testDates.to_pydatetime() + relativedelta(days=predictor.pred))[-len(testPredictionClose): ]
-
-        print ticker , ': ', ('Buy!' if shouldBuy(testPredictionClose) else 'Sell!')
-
-        plt.plot(trainDates, trainClose, label='Train Close')
-        plt.plot(testDates, testClose, label='Test Close')
-        plt.plot(trainPredictionDates, trainPredictionClose, label='Train Prediction')
-        plt.plot(testPredictionDates, testPredictionClose, label='Test Prediction')
-        plt.legend()
+    # Validation
+    for ticker in tickers:
+        stock = pdData.DataReader(ticker, 'yahoo', str(datetime.today() - relativedelta(months=1)).split(' ')[0], str(datetime.today() - relativedelta(months=0)).split(' ')[0])
+        close = np.array(stock['Close'])
+        n = np.arange(len(close))
+        prediction = predictor.predict(close)
+        m = np.arange(len(prediction)) + predictor.ref
+        plt.plot(n, close, label='Closing Price')
+        plt.plot(m, prediction, label=ticker + ' Prediction')
         plt.title(ticker)
+        plt.legend()
         plt.show()
