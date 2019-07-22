@@ -1,0 +1,7 @@
+Listing	/Users/Seth/Code/Projects/Websites/Test/app/Listing.php	/^class Listing {$/;"	class	line:5
+__construct	/Users/Seth/Code/Projects/Websites/Test/app/Listing.php	/^  public function __construct($name, $description, $price) {$/;"	function	line:7
+name	/Users/Seth/Code/Projects/Websites/Test/app/Listing.php	/^    $this->name = htmlspecialchars($name);$/;"	variable	line:12
+description	/Users/Seth/Code/Projects/Websites/Test/app/Listing.php	/^    $this->description = htmlspecialchars($description);$/;"	variable	line:13
+price	/Users/Seth/Code/Projects/Websites/Test/app/Listing.php	/^    $this->price = htmlspecialchars($price);$/;"	variable	line:14
+toHTML	/Users/Seth/Code/Projects/Websites/Test/app/Listing.php	/^  public function toHTML() {$/;"	function	line:17
+listings	/Users/Seth/Code/Projects/Websites/Test/routes/web.php	/^  $listings = array();$/;"	variable	line:21

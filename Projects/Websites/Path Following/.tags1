@@ -4,8 +4,11 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8	//
-setup	/Users/Seth/Code/Projects/Websites/Path Following/index.js	/^function setup() {$/;"	function	line:8
-start	/Users/Seth/Code/Projects/Websites/Path Following/index.js	/^function start() {$/;"	function	line:33
-function.start	/Users/Seth/Code/Projects/Websites/Path Following/index.js	/^function start() {$/;"	function	line:33
-draw	/Users/Seth/Code/Projects/Websites/Path Following/index.js	/^function draw() {$/;"	function	line:41
-function.draw	/Users/Seth/Code/Projects/Websites/Path Following/index.js	/^function draw() {$/;"	function	line:41
+constructor	/Users/Seth/Code/Projects/Websites/Path Following/car.js	/^  constructor(pos, brain) {$/;"	function	line:2
+accelerate	/Users/Seth/Code/Projects/Websites/Path Following/car.js	/^  accelerate(dv) {$/;"	function	line:33
+turn	/Users/Seth/Code/Projects/Websites/Path Following/car.js	/^  turn(da) {$/;"	function	line:38
+update	/Users/Seth/Code/Projects/Websites/Path Following/car.js	/^  update() {$/;"	function	line:41
+draw	/Users/Seth/Code/Projects/Websites/Path Following/car.js	/^  draw() {$/;"	function	line:47
+senses	/Users/Seth/Code/Projects/Websites/Path Following/car.js	/^  senses(sensor, wall) {$/;"	function	line:65
+think	/Users/Seth/Code/Projects/Websites/Path Following/car.js	/^  think(data) {$/;"	function	line:83
+intersects	/Users/Seth/Code/Projects/Websites/Path Following/car.js	/^  intersects(wall) {$/;"	function	line:95

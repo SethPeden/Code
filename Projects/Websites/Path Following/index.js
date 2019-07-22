@@ -2,26 +2,14 @@ let cars = []
 var walls = []
 var checkpoints = []
 var best = null
-let N = 100
+let N = 50
+let C = 25
 var c
+var dead
 
 function setup() {
   createCanvas(window.innerWidth, window.innerHeight)
   start()
-  walls.push(new Wall(createVector(0, 0), createVector(0, height), 4))
-  walls.push(new Wall(createVector(0, height), createVector(width, height), 4))
-  walls.push(new Wall(createVector(width, height), createVector(width, 0), 4))
-  walls.push(new Wall(createVector(width, 0), createVector(0, 0), 4))
-
-  walls.push(new Wall(createVector(width / 8, height / 4), createVector(width / 8, 3 * height / 4), 4))
-  walls.push(new Wall(createVector(width / 8, 3 * height / 4), createVector(7 * width / 8, 3 * height / 4), 4))
-  // walls.push(new Wall(createVector(2 * width / 3, 2 * height / 3), createVector(2 * width / 3, 7 * height / 8), 4))
-  // walls.push(new Wall(createVector(2 * width / 3, 7 * height / 8), createVector(5 * width / 6, 2 * height / 3), 4))
-
-
-  walls.push(new Wall(createVector(7 * width / 8, 3 * height / 4), createVector(7 * width / 8, height / 4), 4))
-  walls.push(new Wall(createVector(7 * width / 8, height / 4), createVector(width / 8, height / 4), 4))
-
   let center = createVector(width / 2, height / 2)
   for (let x = 0; x < N; x++) {
     let angle = 2 * PI * x / N
@@ -32,19 +20,42 @@ function setup() {
 
 function start() {
   c = 1
+  dead = 0
   cars = []
-  for (let i = 0; i < 100; i++) {
+  for (let i = 0; i < C; i++) {
     cars.push(new Car(createVector(width / 8, height / 8), best))
   }
+
+  walls = []
+
+  walls.push(new Wall(createVector(0, 0), createVector(0, height), 4))
+  walls.push(new Wall(createVector(0, height), createVector(width, height), 4))
+  walls.push(new Wall(createVector(width, height), createVector(width, 0), 4))
+  walls.push(new Wall(createVector(width, 0), createVector(0, 0), 4))
+
+  let start = createVector(random(width - 200) + 100, random(height - 200) + 100)
+  var last = start
+  for (let i = 0; i < 5; i++) {
+    let point = createVector(random(width - 200) + 100, random(height - 200) + 100)
+    walls.push(new Wall(last, point, 4))
+    last = point
+  }
+  walls.push(new Wall(last, start, 4))
+
+  // walls.push(new Wall(createVector(width / 8, height / 4), createVector(width / 8, 3 * height / 4), 4))
+  // walls.push(new Wall(createVector(width / 8, 3 * height / 4), createVector(7 * width / 8, 3 * height / 4), 4))
+  // walls.push(new Wall(createVector(7 * width / 8, 3 * height / 4), createVector(7 * width / 8, height / 4), 4))
+  // walls.push(new Wall(createVector(7 * width / 8, height / 4), createVector(width / 8, height / 4), 4))
+
 }
 
 function draw() {
   c++
   // if (c % (60 * 7) == 0 || keyIsDown(ENTER)) {
-  if (c % (60 * 7) == 0) {
+  if (dead >= cars.length || c % (60 * 20) == 0) {
     highest = 0
     for (let i = 0; i < cars.length; i++) {
-      let score = 2 * (cars[i].alive ? 1 : 0) + 4 * cars[i].checks.length
+      let score = 1 * (cars[i].alive ? 1 : 0) + 5 * cars[i].checks.length
       if (score > highest || highest == 0) {
         highest = score
         best = cars[i].brain
@@ -55,21 +66,21 @@ function draw() {
 
   background(24)
 
-  if (keyIsDown(ENTER)) {
+  // if (keyIsDown(ENTER)) {
     for (let x in walls) {
       walls[x].draw(255, 255, 255, 255)
     }
     for (let x in checkpoints) {
       checkpoints[x].draw(255, 0, 0, 32)
     }
-  }
+  // }
 
   for (let x = cars.length - 1; x >= 0; x--) {
     car = cars[x]
 
-    if (keyIsDown(ENTER)) {
+    // if (keyIsDown(ENTER)) {
       car.draw()
-    }
+    // }
 
     car.update()
 
@@ -79,6 +90,7 @@ function draw() {
         let wall = walls[x]
         if (car.intersects(wall)) {
           car.alive = false
+          dead++
         }
         for (let y in car.sensorIDs) {
           let id = car.sensorIDs[y]

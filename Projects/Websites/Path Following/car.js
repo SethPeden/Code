@@ -5,18 +5,18 @@ class Car {
     this.alive = true
     this.pos = pos
     this.lastpos = null
-    // this.speed = random(0, 15)
+    this.speed = random(0, 15)
     this.angle = random(0, 2 * PI)
-    this.speed = 5
+    // this.speed = 5
     // this.angle = 0
     this.sensorIDs = [0, 1, 2, 3, 4, 5, 6, 7]
-    this.sensorLength = 100
+    this.sensorLength = 25
     if (brain) {
       this.brain = []
       for (let y = 0; y < 2; y++) {
         this.brain.push([])
         for (let x = 0; x < 10; x++) {
-          this.brain[y].push(brain[y][x] + random(-0.2, 0.2) / ((y + 1) * (y + 1)))
+          this.brain[y].push(brain[y][x] + random(-1.0, 1.0) / ((y + 1) * (y + 1)))
         }
       }
     } else {
@@ -24,14 +24,14 @@ class Car {
       for (let y = 0; y < 2; y++) {
         this.brain.push([])
         for (let x = 0; x < 10; x++) {
-          this.brain[y].push(random(-1.0, 1.0) / ((y + 1) * (y + 1)))
+          this.brain[y].push(random(-10.0, 10.0) / ((y + 1) * (y + 1)))
         }
       }
     }
     this.checks = []
   }
   accelerate(dv) {
-    if (abs(this.speed + dv) < 15) {
+    if (abs(this.speed + dv) < 10) {
       this.speed += dv
     }
   }
